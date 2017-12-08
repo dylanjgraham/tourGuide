@@ -7,10 +7,14 @@ import java.util.Map;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -146,13 +150,48 @@ public class Match
 			return response;
 	}
 	
+	public static ProspectiveStudent gui()
+	{
+		//JFrame frame = new JFrame("InputDialog Example #1");
+		JTextField nameField = new JTextField(5);
+		JTextField homeTownField = new JTextField(5);
+		JTextField majorField = new JTextField(5);
+		JTextField minorField = new JTextField(5);
+		
+	    JPanel myPanel = new JPanel();
+	    myPanel.add(new JLabel("Name"));
+	    myPanel.add(nameField);
+	    myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+	    myPanel.add(new JLabel("Home town"));
+	    myPanel.add(homeTownField);
+	    myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+	    myPanel.add(new JLabel("Prospective Major"));
+	    myPanel.add(majorField);
+	    myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+	    myPanel.add(new JLabel("Prospective Minor"));
+	    myPanel.add(minorField);
+
+	    int result = JOptionPane.showConfirmDialog(null, myPanel,
+	            "Please Enter the following information", JOptionPane.OK_CANCEL_OPTION);
+	        if (result == JOptionPane.OK_OPTION) {
+	         // System.out.println("x value: " + xField.getText());
+	         // System.out.println("y value: " + yField.getText());
+	        	ProspectiveStudent dylan = new ProspectiveStudent(nameField.getText(), homeTownField.getText(), majorField.getText(), minorField.getText());
+	        return dylan;
+	        }
+			return null;
+	}
+	
 	
 	public static void main(String [] args)
 	{
-		ProspectiveStudent dylan = new ProspectiveStudent("Dylan","Hillsborough", "Computer Science", "");
-		String result = findMatches(dylan);
+		
+		//ProspectiveStudent dylan = new ProspectiveStudent("Dylan","Hillsborough", "Computer Science", "");
+		
+		String result = findMatches(gui());
 		System.out.println(result);
 		System.out.print("");
+		
         
 	}
 }
